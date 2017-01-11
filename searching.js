@@ -11,7 +11,7 @@ var indexOf = function(array, value) {
 // Binary search
 var arr = [1,2,5,7,9,10,13,33];
 
-var binarySearch = funtion(array, value, start, end) {
+var binarySearch = function(array, value, start, end) {
   var start = start === undefined ? 0 : start;
   var end = end === undefined ? array.length : end;
 
@@ -33,3 +33,79 @@ var binarySearch = funtion(array, value, start, end) {
     return binarySearch(array, value, start, index - 1);
   }
 };
+
+const treely = {
+	value: 10,
+	left: {
+		value: 8,
+		left: {
+			value: 6,
+			left: null,
+			right: null
+		},
+		right: {
+			value: 9,
+			left: null,
+			right: null
+		}
+	},
+	right: {
+		value: 12,
+		left: {
+			value: 11,
+			left: null,
+			right: null
+		},
+		right: {
+			value: 15,
+			left: null,
+			right: null
+		}
+	}
+}
+
+// Binary tree searches
+var BinaryTree = function(value) {
+	this.value = null;
+	this.left = null;
+	this.right = null;
+}
+
+// Depth-first search (in-order traversal)
+BinaryTree.prototype.dfs = function(values) {
+	values = values || [];
+	if (this.left) {
+		values = this.left.dfs(values);
+	}
+	values.push(this.value);
+	if (this.right) {
+		values = this.right.dfs(values);
+	}
+	return values;
+}
+
+// Breadth-first search
+BinaryTree.prototype.bfs = function(values) {
+	values = values || [];
+
+	var queue = [this]; // aka root node
+
+	while (queue.length) {
+		var node = queue.shift();
+		values.push(node.value);
+
+		if (node.left) {
+			queue.push(node.left);
+		}
+
+		if (node.right) {
+			queue.push(node.right);
+		}
+	}
+
+	return values;
+}
+
+console.log(bfs(treely));
+
+//
